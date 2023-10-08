@@ -75,10 +75,10 @@ class Port:
             0
         ]
 
-    def _write(self, reg, val):
+    def _write(self, reg, val, stop=True):
         val &= 0xFF
         self._mcp._i2c.writeto_mem(
-            self._mcp._address, self._which_reg(reg), bytearray([val])
+            self._mcp._address, self._which_reg(reg), bytearray([val]), stop
         )
         # if writing to the config register, make a copy in mcp so that it knows
         # which bank you're using for subsequent writes
